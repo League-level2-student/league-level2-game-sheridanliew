@@ -115,6 +115,7 @@ public class ObjectManager implements ActionListener {
 //
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("action");
 		// TODO Auto-generated method stub
 //		addAlien();
 	}
