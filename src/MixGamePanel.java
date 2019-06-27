@@ -19,7 +19,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	Font bodyFont;
 	Font captionFont;
 	Timer frameDraw;
-	ObjectManager om;
+	MixObjectManager om;
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
@@ -27,10 +27,10 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	MixGamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
 		bodyFont = new Font("Arial", Font.PLAIN, 50);
-		captionFont = new Font("Arial", Font.PLAIN, 18);
+		captionFont = new Font("Arial", Font.PLAIN, 36);
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
-		om = new ObjectManager();
+		om = new MixObjectManager();
 	}
 
 	@Override
@@ -39,14 +39,12 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 			drawMenuState(g);
 		} else if (currentState == GAME) {
 			drawGameState(g);
-			System.out.println("draw");
 		} else if (currentState == END) {
 			drawEndState(g);
 		}
 	}
 
 	void startGame() {
-		System.out.println("game state");
 	}
 
 	void updateMenuState() {
@@ -66,18 +64,35 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.setFont(titleFont);
 		g.setColor(Color.MAGENTA);
 		g.drawString("MIX", 20, 180);
+		g.setFont(captionFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("a 2048 game", 35, 250);
 		g.setFont(bodyFont);
 		g.setColor(Color.CYAN);
-		g.drawString("Press ENTER to start", 30, 300);
-		g.drawString("Press SPACE for intructions", 30, 400);
+		g.drawString("Press ENTER to start", 30, 420);
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("MIX", 20, 180);
+		g.setFont(bodyFont);
+		g.setColor(Color.CYAN);
+		g.drawString("SCORE: " + om.score, 500, 180);
+		g.setFont(captionFont);
+		g.drawString(
+				"Use the arrow keys to move the blocks. When two tiles with the same number touch, they merge into one. Join the numbers to reach the 2048 tile!",
+				35, 900);
+		g.setColor(Color.GRAY);
+		g.fillRoundRect(100, 220, 600, 600, 20, 20);
 		g.setColor(Color.LIGHT_GRAY);
-		g.fillOval(250, 250, 200, 200);
-	//	om.draw(g);
+		g.fillRoundRect(120, 240, 140, 140, 10, 10);
+		g.fillRoundRect(120, 400, 140, 140, 10, 10);
+		g.fillRoundRect(120, 560, 140, 140, 10, 10);
+		g.fillRoundRect(120, 720, 140, 140, 10, 10);
+		om.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -94,17 +109,12 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-/*		if (currentState == MENU) {
-			System.out.println("menu on");
-			updateMenuState();
-		} else if (currentState == GAME) {
-			System.out.println("game on");
-			updateGameState();
-		} else if (currentState == END) {
-			System.out.println("end on");
-			updateEndState();
-		}
-		repaint();*/
+		/*
+		 * if (currentState == MENU) { System.out.println("menu on"); updateMenuState();
+		 * } else if (currentState == GAME) { System.out.println("game on");
+		 * updateGameState(); } else if (currentState == END) {
+		 * System.out.println("end on"); updateEndState(); } repaint();
+		 */
 	}
 
 	@Override
@@ -128,6 +138,21 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 			}
 		}
 		repaint();
+//		if (currentState == GAME) {
+//			if (e.getKeyCode() == KeyEvent.VK_UP) {
+//				System.out.println("UP");
+//					r.up();
+//			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//				System.out.println("DOWN");
+//					r.down();
+//			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//				System.out.println("LEFT");
+//					r.left();
+//			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//				System.out.println("RIGHT");
+//					r.right();
+//			}
+//		}
 	}
 
 	@Override

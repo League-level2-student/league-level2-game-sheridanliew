@@ -12,6 +12,7 @@ public class Block {
 	boolean isActive;
 	Rectangle collisionBox;
 	Font numberFont;
+	int num;
 
 	Block(int x, int y, int width, int height) {
 		this.x = x;
@@ -22,6 +23,7 @@ public class Block {
 		isActive = true;
 		collisionBox = new Rectangle(x, y, width, height);
 		numberFont = new Font("Arial", Font.PLAIN, 24);
+		num = 2;
 	}
 
 	void update() {
