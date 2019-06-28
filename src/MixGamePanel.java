@@ -27,7 +27,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	MixGamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
 		bodyFont = new Font("Arial", Font.PLAIN, 50);
-		captionFont = new Font("Arial", Font.PLAIN, 36);
+		captionFont = new Font("Arial", Font.PLAIN, 24);
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
 		om = new MixObjectManager();
@@ -66,7 +66,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.drawString("MIX", 20, 180);
 		g.setFont(captionFont);
 		g.setColor(Color.MAGENTA);
-		g.drawString("a 2048 game", 35, 250);
+		g.drawString("a 2048 game", 35, 245);
 		g.setFont(bodyFont);
 		g.setColor(Color.CYAN);
 		g.drawString("Press ENTER to start", 30, 420);
@@ -82,16 +82,28 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.setColor(Color.CYAN);
 		g.drawString("SCORE: " + om.score, 500, 180);
 		g.setFont(captionFont);
-		g.drawString(
-				"Use the arrow keys to move the blocks. When two tiles with the same number touch, they merge into one. Join the numbers to reach the 2048 tile!",
-				35, 900);
+		g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
+		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
+		g.drawString("2048 tile!", 35, 920);
 		g.setColor(Color.GRAY);
-		g.fillRoundRect(100, 220, 600, 600, 20, 20);
+		g.fillRoundRect(100, 215, 610, 610, 20, 20);
 		g.setColor(Color.LIGHT_GRAY);
-		g.fillRoundRect(120, 240, 140, 140, 10, 10);
-		g.fillRoundRect(120, 400, 140, 140, 10, 10);
-		g.fillRoundRect(120, 560, 140, 140, 10, 10);
-		g.fillRoundRect(120, 720, 140, 140, 10, 10);
+		g.fillRoundRect(110, 230, 140, 140, 10, 10);
+		g.fillRoundRect(110, 380, 140, 140, 10, 10);
+		g.fillRoundRect(110, 530, 140, 140, 10, 10);
+		g.fillRoundRect(110, 680, 140, 140, 10, 10);
+		g.fillRoundRect(260, 230, 140, 140, 10, 10);
+		g.fillRoundRect(260, 380, 140, 140, 10, 10);
+		g.fillRoundRect(260, 530, 140, 140, 10, 10);
+		g.fillRoundRect(260, 680, 140, 140, 10, 10);
+		g.fillRoundRect(410, 230, 140, 140, 10, 10);
+		g.fillRoundRect(410, 380, 140, 140, 10, 10);
+		g.fillRoundRect(410, 530, 140, 140, 10, 10);
+		g.fillRoundRect(410, 680, 140, 140, 10, 10);
+		g.fillRoundRect(560, 230, 140, 140, 10, 10);
+		g.fillRoundRect(560, 380, 140, 140, 10, 10);
+		g.fillRoundRect(560, 530, 140, 140, 10, 10);
+		g.fillRoundRect(560, 680, 140, 140, 10, 10);
 		om.draw(g);
 	}
 
@@ -138,21 +150,23 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 			}
 		}
 		repaint();
-//		if (currentState == GAME) {
-//			if (e.getKeyCode() == KeyEvent.VK_UP) {
-//				System.out.println("UP");
-//					r.up();
-//			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//				System.out.println("DOWN");
-//					r.down();
-//			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//				System.out.println("LEFT");
-//					r.left();
-//			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//				System.out.println("RIGHT");
-//					r.right();
-//			}
-//		}
+		if (currentState == GAME) {
+			for (Block b : om.blocks) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					System.out.println("UP");
+					b.up();
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					System.out.println("DOWN");
+					b.down();
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					System.out.println("LEFT");
+					b.left();
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					System.out.println("RIGHT");
+					b.right();
+				}
+			}
+		}
 	}
 
 	@Override

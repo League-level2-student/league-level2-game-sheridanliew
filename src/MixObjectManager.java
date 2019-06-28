@@ -29,6 +29,7 @@ public class MixObjectManager {
 	void draw(Graphics g) {
 		for (Block b : blocks) {
 			b.draw(g);
+			
 		}
 	}
 
@@ -39,24 +40,24 @@ public class MixObjectManager {
 //				a.isActive = false;
 //			}
 		}
-//		checkCollision();
+		checkCollision();
 //		purgeObjects();
 	}
 
-//	void checkCollision() {
-//		for (int i = 0; i < blocks.size(); i++) {
-//			if (blocks.get(i).collisionBox.intersects(blocks.get(i).collisionBox)) {
-//				r.isActive = false;
-//				aliens.get(i).isActive = false;
-//			}
+	void checkCollision() {
+		for (int i = 0; i < blocks.size(); i++) {
+			if (blocks.get(i).collisionBox.intersects(blocks.get(i).collisionBox)) {
+				int num = Integer.parseInt(blocks.get(i).number);
+				num = num + num;
+			}
 //			for (int j = 0; j < projectiles.size(); j++) {
 //				if (projectiles.get(j).collisionBox.intersects(aliens.get(i).collisionBox)) {
 //					projectiles.get(j).isActive = false;
 //					aliens.get(i).isActive = false;
 //					score++;
 //				}
-//			}
-//		}
+		}
+	}
 //
 //	void purgeObjects() {
 //		for (int i = 0; i < aliens.size(); i++) {
