@@ -20,9 +20,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	Font captionFont;
 	Timer frameDraw;
 	MixObjectManager om;
-	public static BufferedImage image;
-	public static boolean needImage = true;
-	public static boolean gotImage = false;
+	Board board = new Board();
 
 	MixGamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
@@ -86,7 +84,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
 		g.drawString("2048 tile!", 35, 920);
 		g.setColor(Color.GRAY);
-		g.fillRoundRect(100, 215, 610, 610, 20, 20);
+		g.fillRoundRect(100, 220, 610, 610, 20, 20);
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRoundRect(110, 230, 140, 140, 10, 10);
 		g.fillRoundRect(110, 380, 140, 140, 10, 10);
@@ -105,6 +103,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.fillRoundRect(560, 530, 140, 140, 10, 10);
 		g.fillRoundRect(560, 680, 140, 140, 10, 10);
 		om.draw(g);
+		board.draw(g);
 	}
 
 	void drawEndState(Graphics g) {

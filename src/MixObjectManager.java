@@ -23,13 +23,12 @@ public class MixObjectManager {
 	}
 
 	void addBlock(Block b) {
-		blocks.add(new Block(board[r][r], 0, 50, 50));
+		blocks.add(new Block(225, 105, 140, 140));
 	}
 
 	void draw(Graphics g) {
 		for (Block b : blocks) {
 			b.draw(g);
-			
 		}
 	}
 
@@ -46,8 +45,9 @@ public class MixObjectManager {
 
 	void checkCollision() {
 		for (int i = 0; i < blocks.size(); i++) {
+			int num = Integer.parseInt(blocks.get(i).number);
 			if (blocks.get(i).collisionBox.intersects(blocks.get(i).collisionBox)) {
-				int num = Integer.parseInt(blocks.get(i).number);
+//				int num = Integer.parseInt(blocks.get(i).number);
 				num = num + num;
 			}
 //			for (int j = 0; j < projectiles.size(); j++) {

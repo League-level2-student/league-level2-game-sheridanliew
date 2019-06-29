@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Block {
 	int x;
@@ -35,11 +37,13 @@ public class Block {
 	}
 
 	void draw(Graphics g) {
+//		g.setColor(Color.WHITE);
+//		g.fillRoundRect(x, y, width, height, 10, 10);
+//		g.setColor(Color.DARK_GRAY);
+//		g.setFont(numberFont);
+//		g.drawString(number, width/2, height/2);
 		g.setColor(Color.WHITE);
-		g.fillRoundRect(x, y, width, height, 10, 10);
-		g.setColor(Color.DARK_GRAY);
-		g.setFont(numberFont);
-		g.drawString(number, width/2, height/2);
+		g.fillRect(225, 105, 145, 145);
 	}
 	
 	public void up() {
