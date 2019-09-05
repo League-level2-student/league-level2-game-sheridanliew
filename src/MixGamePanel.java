@@ -83,8 +83,8 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
 		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
 		g.drawString("2048 tile!", 35, 920);
-		g.setColor(Color.GRAY);
-		g.fillRoundRect(100, 220, 610, 610, 20, 20);
+//		g.setColor(Color.GRAY);
+//		g.fillRoundRect(100, 220, 610, 610, 20, 20);
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRoundRect(110, 230, 140, 140, 10, 10);
 		g.fillRoundRect(110, 380, 140, 140, 10, 10);
