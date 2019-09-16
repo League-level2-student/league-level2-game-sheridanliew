@@ -29,9 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	//Cell[cells.length-1][cells[cells.length-1].length-1];
 
 	GamePanel() {
-		titleFont = new Font("Arial", Font.PLAIN, 48);
-		bodyFont = new Font("Arial", Font.PLAIN, 36);
-		captionFont = new Font("Arial", Font.PLAIN, 18);
+		titleFont = new Font("Arial", Font.PLAIN, 200);
+		bodyFont = new Font("Arial", Font.PLAIN, 50);
+		captionFont = new Font("Arial", Font.PLAIN, 24);
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
 		gameBoard = new Cell[4][4];
@@ -69,27 +69,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
 		g.setFont(titleFont);
-		g.setColor(Color.YELLOW);
-		g.drawString("LEAGUE INVADERS", 20, 150);
+		g.setColor(Color.MAGENTA);
+		g.drawString("MIX", 20, 180);
+		g.setFont(captionFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("a 2048 game", 35, 245);
 		g.setFont(bodyFont);
-		g.drawString("Press ENTER to start", 70, 400);
-//		g.drawString("Press SPACE for intructions", 30, 600);
+		g.setColor(Color.CYAN);
+		g.drawString("Press ENTER to start", 30, 420);
 	}
 
 	void drawGameState(Graphics g) {
-		if (gotImage) {
-			g.drawImage(image, 0, 0, Mix.WIDTH, Mix.HEIGHT, null);
-		} else {
-			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
-		}
-		om.draw(g);
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("MIX", 20, 180);
+		g.setFont(bodyFont);
+		g.setColor(Color.CYAN);
+		g.drawString("SCORE: " + om.score, 500, 180);
 		g.setFont(captionFont);
-		g.setColor(Color.WHITE);
-		g.drawString("Enemies Killed: "+om.getScore(), 40, Mix.HEIGHT-40);
+		g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
+		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
+		g.drawString("2048 tile!", 35, 920);
+		g.setColor(Color.GRAY);
+		g.fillRoundRect(100, 220, 610, 610, 20, 20);
+
+//		om.draw(g);
+//		g.setFont(captionFont);
+//		g.setColor(Color.WHITE);
+//		g.drawString("Score: "+om.getScore(), 40, Mix.HEIGHT-40);
 	}
 
 	void drawEndState(Graphics g) {

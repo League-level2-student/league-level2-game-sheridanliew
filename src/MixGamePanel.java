@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -19,8 +20,10 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	Font bodyFont;
 	Font captionFont;
 	Timer frameDraw;
+	Block[][] gameBoard;
 	MixObjectManager om;
 	Board board = new Board();
+	Timer cellSpawn;
 
 	MixGamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
@@ -29,6 +32,25 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
 		om = new MixObjectManager();
+	}
+
+	void intitializeBlocks() {
+		Random random = new Random();
+		int x1 = random.nextInt(4);
+		int y1 = random.nextInt(4);
+		int x2 = random.nextInt(4);
+		int y2 = random.nextInt(4);
+		for (int i = 0; i < gameBoard.length; i++) {
+			for (int j = 0; j < gameBoard.length; j++) {
+				gameBoard[i][j] = new Block();
+			}
+		}
+		while (x1 == x2 && y1 == y2) {
+			x2 = random.nextInt(4);
+			y2 = random.nextInt(4);
+		}
+		gameBoard[x1][y1].number.equals("2");
+		gameBoard[x2][y2].number.equals("2");
 	}
 
 	@Override
@@ -43,6 +65,8 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	}
 
 	void startGame() {
+		cellSpawn = new Timer(1000, om);
+		cellSpawn.start();
 	}
 
 	void updateMenuState() {
@@ -83,8 +107,8 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
 		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
 		g.drawString("2048 tile!", 35, 920);
-//		g.setColor(Color.GRAY);
-//		g.fillRoundRect(100, 220, 610, 610, 20, 20);
+		g.setColor(Color.GRAY);
+		g.fillRoundRect(100, 220, 610, 610, 20, 20);
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRoundRect(110, 230, 140, 140, 10, 10);
 		g.fillRoundRect(110, 380, 140, 140, 10, 10);
@@ -103,7 +127,6 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		g.fillRoundRect(560, 530, 140, 140, 10, 10);
 		g.fillRoundRect(560, 680, 140, 140, 10, 10);
 		om.draw(g);
-		board.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -146,6 +169,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 				startGame();
 			} else if (currentState == GAME) {
 				currentState++;
+				cellSpawn.stop();
 			}
 		}
 		repaint();

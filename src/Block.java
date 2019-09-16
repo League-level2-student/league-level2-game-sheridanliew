@@ -15,8 +15,9 @@ public class Block {
 	Rectangle collisionBox;
 	Font numberFont;
 	String number;
+	Color color;
 
-	Block(int x, int y, int width, int height) {
+	Block() {
 		this.x = x;
 		x=100;
 		this.y = y;

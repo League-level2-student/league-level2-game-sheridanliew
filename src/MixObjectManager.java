@@ -1,9 +1,11 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MixObjectManager {
+public class MixObjectManager implements ActionListener{
 	int[][] board;
 	List<Block> blocks;
 	Random random;
@@ -71,5 +73,11 @@ public class MixObjectManager {
 //			}
 //		}
 //	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
