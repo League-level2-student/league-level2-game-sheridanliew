@@ -1,14 +1,17 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class MixGamePanel extends JPanel implements ActionListener, KeyListener {
@@ -22,8 +25,9 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	Timer frameDraw;
 	Block[][] gameBoard;
 	MixObjectManager om;
-	Board board = new Board();
 	Timer cellSpawn;
+	JPanel panel;
+	public static BufferedImage image;
 
 	MixGamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
@@ -32,6 +36,13 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
 		om = new MixObjectManager();
+		panel = new JPanel();
+		try {
+			image = ImageIO.read(this.getClass().getResourceAsStream("screenshot.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	void intitializeBlocks() {
@@ -43,14 +54,18 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard.length; j++) {
 				gameBoard[i][j] = new Block();
+				gameBoard[i][j].setOpaque(true);
+				gameBoard[i][j].setBackground(Color.GREEN);
+				panel.add(gameBoard[i][j]);
 			}
 		}
+		Mix.frame.add(panel);
 		while (x1 == x2 && y1 == y2) {
 			x2 = random.nextInt(4);
 			y2 = random.nextInt(4);
 		}
-		gameBoard[x1][y1].number.equals("2");
-		gameBoard[x2][y2].number.equals("2");
+		gameBoard[x1][y1].setValue("2");
+		gameBoard[x2][y2].setValue("2");
 	}
 
 	@Override
@@ -95,37 +110,38 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
-		g.setFont(titleFont);
-		g.setColor(Color.MAGENTA);
-		g.drawString("MIX", 20, 180);
-		g.setFont(bodyFont);
-		g.setColor(Color.CYAN);
-		g.drawString("SCORE: " + om.score, 500, 180);
-		g.setFont(captionFont);
-		g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
-		g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
-		g.drawString("2048 tile!", 35, 920);
-		g.setColor(Color.GRAY);
-		g.fillRoundRect(100, 220, 610, 610, 20, 20);
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRoundRect(110, 230, 140, 140, 10, 10);
-		g.fillRoundRect(110, 380, 140, 140, 10, 10);
-		g.fillRoundRect(110, 530, 140, 140, 10, 10);
-		g.fillRoundRect(110, 680, 140, 140, 10, 10);
-		g.fillRoundRect(260, 230, 140, 140, 10, 10);
-		g.fillRoundRect(260, 380, 140, 140, 10, 10);
-		g.fillRoundRect(260, 530, 140, 140, 10, 10);
-		g.fillRoundRect(260, 680, 140, 140, 10, 10);
-		g.fillRoundRect(410, 230, 140, 140, 10, 10);
-		g.fillRoundRect(410, 380, 140, 140, 10, 10);
-		g.fillRoundRect(410, 530, 140, 140, 10, 10);
-		g.fillRoundRect(410, 680, 140, 140, 10, 10);
-		g.fillRoundRect(560, 230, 140, 140, 10, 10);
-		g.fillRoundRect(560, 380, 140, 140, 10, 10);
-		g.fillRoundRect(560, 530, 140, 140, 10, 10);
-		g.fillRoundRect(560, 680, 140, 140, 10, 10);
+			g.drawImage(image, 0, 0, Mix.WIDTH, Mix.HEIGHT, null);
+//			g.setColor(Color.DARK_GRAY);
+//			g.fillRect(0, 0, Mix.WIDTH, Mix.HEIGHT);
+//			g.setFont(titleFont);
+//			g.setColor(Color.MAGENTA);
+//			g.drawString("MIX", 20, 180);
+//			g.setFont(bodyFont);
+//			g.setColor(Color.CYAN);
+//			g.drawString("SCORE: " + om.score, 500, 180);
+//			g.setFont(captionFont);
+//			g.drawString("Use the arrow keys to move the blocks. When two tiles with the same", 35, 870);
+//			g.drawString("number touch, they merge into one. Join the numbers to reach the", 35, 895);
+//			g.drawString("2048 tile!", 35, 920);
+//			g.setColor(Color.GRAY);
+//			g.fillRoundRect(100, 220, 610, 610, 20, 20);
+//			g.setColor(Color.LIGHT_GRAY);
+//			g.fillRoundRect(110, 230, 140, 140, 10, 10);
+//			g.fillRoundRect(110, 380, 140, 140, 10, 10);
+//			g.fillRoundRect(110, 530, 140, 140, 10, 10);
+//			g.fillRoundRect(110, 680, 140, 140, 10, 10);
+//			g.fillRoundRect(260, 230, 140, 140, 10, 10);
+//			g.fillRoundRect(260, 380, 140, 140, 10, 10);
+//			g.fillRoundRect(260, 530, 140, 140, 10, 10);
+//			g.fillRoundRect(260, 680, 140, 140, 10, 10);
+//			g.fillRoundRect(410, 230, 140, 140, 10, 10);
+//			g.fillRoundRect(410, 380, 140, 140, 10, 10);
+//			g.fillRoundRect(410, 530, 140, 140, 10, 10);
+//			g.fillRoundRect(410, 680, 140, 140, 10, 10);
+//			g.fillRoundRect(560, 230, 140, 140, 10, 10);
+//			g.fillRoundRect(560, 380, 140, 140, 10, 10);
+//			g.fillRoundRect(560, 530, 140, 140, 10, 10);
+//			g.fillRoundRect(560, 680, 140, 140, 10, 10);
 		om.draw(g);
 	}
 
@@ -197,5 +213,7 @@ public class MixGamePanel extends JPanel implements ActionListener, KeyListener 
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 }

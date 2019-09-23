@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Block {
+import javax.swing.JLabel;
+
+public class Block extends JLabel{
 	int x;
 	int y;
 	int width;
@@ -14,23 +16,28 @@ public class Block {
 	boolean isActive;
 	Rectangle collisionBox;
 	Font numberFont;
-	String number;
+	private String number;
 	Color color;
 
 	Block() {
-		this.x = x;
-		x=100;
-		this.y = y;
-		y=100;
-		this.width = width;
-		width=140;
-		this.height = height;
-		height=140;
+//		this.x = x;
+//		x=100;
+//		this.y = y;
+//		y=100;
+//		this.width = width;
+//		width=140;
+//		this.height = height;
+//		height=140;
 		speed = 10;
 		isActive = true;
 		collisionBox = new Rectangle(x, y, width, height);
 		numberFont = new Font("Arial", Font.PLAIN, 24);
 		number = "2";
+	}
+	
+	void setValue(String number) {
+		this.number=number;
+		this.setText(number);
 	}
 
 	void update() {

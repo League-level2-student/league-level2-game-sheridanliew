@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 //2048 game
 public class Mix {
-	JFrame frame;
+	static JFrame frame;
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 1000;
 	MixGamePanel gp;
