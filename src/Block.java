@@ -20,18 +20,8 @@ public class Block extends JLabel{
 	Color color;
 
 	Block() {
-//		this.x = x;
-//		x=100;
-//		this.y = y;
-//		y=100;
-//		this.width = width;
-//		width=140;
-//		this.height = height;
-//		height=140;
-		speed = 10;
-		isActive = true;
 		collisionBox = new Rectangle(x, y, width, height);
-		numberFont = new Font("Arial", Font.PLAIN, 24);
+		numberFont = new Font("Arial", Font.PLAIN, 36);
 		number = "2";
 	}
 	
@@ -41,17 +31,11 @@ public class Block extends JLabel{
 	}
 
 	void update() {
-		collisionBox.setBounds(x, y, width, height);
+
 	}
 
 	void draw(Graphics g) {
-//		g.setColor(Color.WHITE);
-//		g.fillRoundRect(x, y, width, height, 10, 10);
-//		g.setColor(Color.DARK_GRAY);
-//		g.setFont(numberFont);
-//		g.drawString(number, width/2, height/2);
-		g.setColor(Color.WHITE);
-		g.fillRect(225, 105, 145, 145);
+
 	}
 	
 	public void up() {
