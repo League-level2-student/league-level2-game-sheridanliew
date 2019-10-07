@@ -4,11 +4,11 @@ public class Mix {
 	static JFrame frame;
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 1000;
-	MixGamePanel gp;
+	GamePanel gp;
 
 	public Mix() {
 		frame = new JFrame();
-		gp = new MixGamePanel();
+		gp = new GamePanel();
 	}
 
 	void setup() {
