@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements KeyListener{
+public class GamePanel extends JPanel implements KeyListener {
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -31,24 +31,20 @@ public class GamePanel extends JPanel implements KeyListener{
 	JLabel menuBGImageLabel;
 	JLabel gameBGImageLabel;
 	JLabel endBGImageLabel;
-	
+	JPanel gameBoardPanel;
+
 	GamePanel() {
 		titleFont = new Font("Arial", Font.PLAIN, 200);
 		bodyFont = new Font("Arial", Font.PLAIN, 50);
 		captionFont = new Font("Arial", Font.PLAIN, 24);
 		om = new MixObjectManager();
-		JPanel menuState = new JPanel();
-		JPanel gameState = new JPanel();
-		JPanel endState = new JPanel();
-		menuBGImageLabel = new JLabel();
-		gameBGImageLabel = new JLabel();
-		endBGImageLabel = new JLabel();
 		Mix.frame.add(this);
 		Mix.frame.pack();
 		initializeMenuState();
 	}
-	
-	void intitializeBlocks() {
+
+	void initializeBlocks() {
+		gameBoardPanel = new JPanel();
 		Random random = new Random();
 		int x1 = random.nextInt(4);
 		int y1 = random.nextInt(4);
@@ -57,9 +53,14 @@ public class GamePanel extends JPanel implements KeyListener{
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard.length; j++) {
 				gameBoard[i][j] = new Block();
+				gameBoard[i][j].setVisible(true);
 				gameBoard[i][j].setOpaque(true);
 				gameBoard[i][j].setBackground(Color.GREEN);
+				gameBoard[i][j].setLocation(500, 500);
+				gameBoardPanel.add(gameBoard[i][j]);
+				gameBoardPanel.setVisible(true);
 				this.add(gameBoard[i][j]);
+				Mix.frame.pack();
 			}
 		}
 		while (x1 == x2 && y1 == y2) {
@@ -71,31 +72,40 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 
 	void initializeMenuState() {
+		menuState = new JPanel();
+		menuBGImageLabel = new JLabel();
 		menuBGImageLabel.setIcon(new ImageIcon("src/img/menuBG.png"));
-		this.remove(endState);
 		menuState.add(menuBGImageLabel);
 		this.add(menuState);
+		Mix.frame.pack();
 		System.out.println("menu");
 	}
 
 	void initializeGameState() {
+		gameState = new JPanel();
+		gameBGImageLabel = new JLabel();
 		gameBGImageLabel.setIcon(new ImageIcon("src/img/gameBG.png"));
-		this.remove(menuBGImageLabel);
-		this.add(gameBGImageLabel);
+		gameState.add(gameBGImageLabel);
+		this.add(gameState);
+//		this.add(gameBoardPanel);
+		Mix.frame.pack();
 		System.out.println("game");
 	}
 
 	void initializeEndState() {
+		endState = new JPanel();
+		endBGImageLabel = new JLabel();
 		endBGImageLabel.setIcon(new ImageIcon("src/img/endBG.png"));
-		this.remove(gameBGImageLabel);
-		this.add(endBGImageLabel);
+		endState.add(endBGImageLabel);
+		this.add(endState);
+		Mix.frame.pack();
 		System.out.println("end");
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -104,12 +114,15 @@ public class GamePanel extends JPanel implements KeyListener{
 		System.out.println(currentState);
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+				this.remove(endState);
 				currentState = MENU;
 				initializeMenuState();
 			} else if (currentState == MENU) {
+				this.remove(menuState);
 				currentState++;
 				initializeGameState();
 			} else if (currentState == GAME) {
+				this.remove(gameState);
 				currentState++;
 				initializeEndState();
 			}
@@ -119,6 +132,6 @@ public class GamePanel extends JPanel implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
